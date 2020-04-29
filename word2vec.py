@@ -29,27 +29,21 @@ def build_emoji_corpus(data):
     if os.path.exists(emoji):
         os.remove(emoji) 
 
-    df = pd.read_excel(data+'_update.xlsx', sheet_name='Sheet1', encoding = 'utf-8')
-    df = df['comment']
+    with open('./single_vedio/'+data+'.txt', 'r', encoding='utf_8_sig') as f:
+        for c in f:
+            try:
+                if '[' in c and ']' in c:
+                    sidx = c.index('[')
+                    eidx = c.index(']')
+                    c = c[sidx+1:eidx]
 
-    for c in df:
-        try:
-            if '[' in c and ']' in c:
-                sidx = c.index('[')
-                eidx = c.index(']')
-                c = c[sidx+1:eidx]
-
-                if not os.path.exists(emoji):
-                    with open(emoji, 'w', newline='\n', encoding='utf-8') as f:
+                    with open(emoji, 'a', newline='\n', encoding='utf_8_sig') as f:
                         f.write(c+'\r\n')
-                else:
-                    with open(emoji, 'a', newline='\n', encoding='utf-8') as f:
-                        f.write(c+'\r\n')
-        except:
-            continue
+            except:
+                continue
 
 
-def data_process(data):
+def data_process_xlsx(data):
     jieba.load_userdict('./output/emoji.txt')
     df = pd.read_excel(data+'_update.xlsx', sheet_name='Sheet1', encoding = 'utf-8')
     df = df['comment'].map(lambda x : ''.join(re.findall('[\u4e00-\u9fff]', str(x))))
@@ -63,30 +57,33 @@ def data_process(data):
     return sl
 
 
-def add_sentence_corpus(sl, save_path='sentence.txt',clean=False):
+def data_process_txt(data):    
+    jieba.load_userdict('./output/emoji.txt')
+    with open('./single_vedio/'+data+'.txt', encoding = 'utf_8_sig') as f:
+        s1 = []
+        for l in f.readlines():
+            l = ''.join(re.findall('[\u4e00-\u9fff]', str(l)))
+            s = jieba.lcut(l, cut_all=False, HMM=True)
+            s1.append(s)
+        print('good'+data)
+        return (s1, data)
 
-    if clean:
-        os.path.remove(save_path)
+
+def add_sentence_corpus(sl, data, save_path='./output/'):
+
+    if os.path.exists(save_path+data+'_s.txt'):
+        os.remove(save_path+data+'_s.txt')
+        open(save_path+data+'_s.txt', 'w', encoding='utf_8_sig')
 
     for line in sl:
-        if not os.path.exists(save_path):
-            with open(save_path, 'w', newline='\n', encoding='utf-8') as f:
-                f.write(line+'\r\n')
-        else:
-            with open(save_path, 'a', newline='\n', encoding='utf-8') as f:
-                f.write(line+'\r\n')    
-    print('good2')
+        with open(save_path+data+'_s.txt', 'a', newline='\n', encoding='utf_8_sig') as f:
+            f.write(' '.join(line)+'\r\n')    
+    print('good2'+data)
 
 
 
-def test2():
-    str1='hjggj小vjjk明'
-    pat=re.compile(r'[\u4e00-\u9fa5]+')
-    result=pat.findall(str1)
-    print(result)
 
-
-def build_w2v(st_path):
+def build_w2v(st_path, save_path):
     # sys.argv[0]获取的是脚本文件的文件名称
     program = os.path.basename(sys.argv[0])
     print(program)
@@ -118,17 +115,19 @@ def build_w2v(st_path):
     alpha (float, optional) – 初始学习率
     iter (int, optional) – 迭代次数，默认为5
     '''
-    model = Word2Vec(LineSentence(st_path), size=300, window=2, min_count=2, workers=cpu_count())
+    model = Word2Vec(LineSentence(st_path), size=300, window=2, min_count=5, workers=cpu_count())
     
     # model 保存
-    model.save('./output/TikTok_word2vec.model')
+    # model.save(save_path)
 
     #不以C语言可以解析的形式存储词向量
-    model.wv.save_word2vec_format('./output/TikTok-300d-170h', binary=False)
+    model.wv.save_word2vec_format(save_path, binary=False)
+
+
+
 
 def evaluate(testwords, model='./output/TikTok_word2vec.model'):
     TikTok_w2v_model = Word2Vec.load(model)
-
     for i in testwords:
         res = TikTok_w2v_model.most_similar(i)
         print(i, 'the probability of similar:', res)
@@ -136,18 +135,25 @@ def evaluate(testwords, model='./output/TikTok_word2vec.model'):
 
 
 if __name__ == "__main__":
+    # build_emoji_corpus('雷军评论')
+
     # 制作 setence corpus
-    # dsl = ['dataset'+str(i) for i in range(2, 19)]
+    dsl = ['减肥健康', '情感恋爱', '抗疫', '搞笑2', '搞笑3', '明星李易峰', '罗永浩', '董明珠', '雷军评论']
     # p = Pool(4)
-    # sls = p.map(data_process, dsl)
+    # sls = p.map(data_process_txt, dsl)
     # p.close()
     # p.join()
-    # for ls in sls:
-    #     add_sentence_corpus(ls)
+    # for ls, data in sls:
+    #     # print('data:', data, 'ls', ls)
+    #     # print('--'*20)
+    #     add_sentence_corpus(ls, data)
 
-    # 制作 word2vector
-    #build_w2v('./output/sentence.txt')    
+    for p, _, fs in [i for i in os.walk('./output')]:
+        for f in fs[1:]:
+            f_p = p+'/'+f
+            #制作 word2vector
+            build_w2v(f_p, p+'/'+f[:3]+'.vec')    
 
     # test word2vector
-    testwords = ['哈哈', '主播', '可爱', '厉害', '心疼']
-    evaluate(testwords)
+    # testwords = ['哈哈', '主播', '可爱', '厉害', '心疼']
+    # evaluate(testwords)
