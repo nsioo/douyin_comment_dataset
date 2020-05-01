@@ -1,0 +1,19 @@
+1.从数据集中收集pos/neg seed words 5-15
+
+
+总整体数据集中选取一些seed word, (5-15)个, 去training 随机视频的数据, 的到的结果可视化,
+
+
+? 如果5-15 词 怎么才能保证embedding的到
+
+
+2. 可视化
+3. 尝试爬虫, 尝试爬取抖音英文版数据集
+
+
+----------------------------------------------
+research method presentation  (declutter)
+research paper
+明天, probability test
+
+

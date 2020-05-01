@@ -760,3 +760,119 @@
 2020-04-29 14:13:01,158: INFO: EPOCH - 5 : training on 93224 raw words (61880 effective words) took 0.1s, 539725 effective words/s
 2020-04-29 14:13:01,159: INFO: training on a 466120 raw words (309024 effective words) took 0.6s, 505284 effective words/s
 2020-04-29 14:13:01,159: INFO: storing 2231x300 projection weights into ./output/vec/À×¾üÆÀ.vec
+2020-05-01 10:27:52,523: INFO: running word2vec.py 
+2020-05-01 10:27:52,875: INFO: collecting all words and their counts
+2020-05-01 10:27:52,879: INFO: PROGRESS: at sentence #0, processed 0 words, keeping 0 word types
+2020-05-01 10:27:52,958: INFO: PROGRESS: at sentence #10000, processed 48089 words, keeping 5643 word types
+2020-05-01 10:27:52,992: INFO: PROGRESS: at sentence #20000, processed 91601 words, keeping 7503 word types
+2020-05-01 10:27:53,034: INFO: PROGRESS: at sentence #30000, processed 139758 words, keeping 15208 word types
+2020-05-01 10:27:53,077: INFO: PROGRESS: at sentence #40000, processed 189109 words, keeping 21428 word types
+2020-05-01 10:27:53,135: INFO: PROGRESS: at sentence #50000, processed 241696 words, keeping 27176 word types
+2020-05-01 10:27:53,198: INFO: PROGRESS: at sentence #60000, processed 292136 words, keeping 31886 word types
+2020-05-01 10:27:53,261: INFO: PROGRESS: at sentence #70000, processed 342363 words, keeping 36261 word types
+2020-05-01 10:27:53,349: INFO: PROGRESS: at sentence #80000, processed 395017 words, keeping 40243 word types
+2020-05-01 10:27:53,418: INFO: PROGRESS: at sentence #90000, processed 447457 words, keeping 43761 word types
+2020-05-01 10:27:53,480: INFO: PROGRESS: at sentence #100000, processed 496860 words, keeping 47306 word types
+2020-05-01 10:27:53,522: INFO: PROGRESS: at sentence #110000, processed 546167 words, keeping 50718 word types
+2020-05-01 10:27:53,560: INFO: PROGRESS: at sentence #120000, processed 593803 words, keeping 53915 word types
+2020-05-01 10:27:53,605: INFO: PROGRESS: at sentence #130000, processed 645989 words, keeping 55328 word types
+2020-05-01 10:27:53,634: INFO: collected 56583 word types from a corpus of 679346 raw words and 135892 sentences
+2020-05-01 10:27:53,634: INFO: Loading a fresh vocabulary
+2020-05-01 10:27:53,710: INFO: effective_min_count=5 retains 12258 unique words (21% of original 56583, drops 44325)
+2020-05-01 10:27:53,710: INFO: effective_min_count=5 leaves 609983 word corpus (89% of original 679346, drops 69363)
+2020-05-01 10:27:53,809: INFO: deleting the raw counts dictionary of 56583 items
+2020-05-01 10:27:53,814: INFO: sample=0.001 downsamples 37 most-common words
+2020-05-01 10:27:53,814: INFO: downsampling leaves estimated 517045 word corpus (84.8% of prior 609983)
+2020-05-01 10:27:53,880: INFO: estimated required memory for 12258 words and 300 dimensions: 35548200 bytes
+2020-05-01 10:27:53,880: INFO: resetting layer weights
+2020-05-01 10:27:54,384: INFO: training model with 4 workers on 12258 vocabulary and 300 features, using sg=0 hs=0 sample=0.001 negative=5 window=3
+2020-05-01 10:27:55,391: INFO: EPOCH 1 - PROGRESS: at 66.57% examples, 344078 words/s, in_qsize 6, out_qsize 2
+2020-05-01 10:27:55,623: INFO: worker thread finished; awaiting finish of 3 more threads
+2020-05-01 10:27:55,625: INFO: worker thread finished; awaiting finish of 2 more threads
+2020-05-01 10:27:55,636: INFO: worker thread finished; awaiting finish of 1 more threads
+2020-05-01 10:27:55,641: INFO: worker thread finished; awaiting finish of 0 more threads
+2020-05-01 10:27:55,644: INFO: EPOCH - 1 : training on 679346 raw words (517062 effective words) took 1.3s, 412529 effective words/s
+2020-05-01 10:27:56,651: INFO: EPOCH 2 - PROGRESS: at 87.69% examples, 445946 words/s, in_qsize 7, out_qsize 0
+2020-05-01 10:27:56,699: INFO: worker thread finished; awaiting finish of 3 more threads
+2020-05-01 10:27:56,699: INFO: worker thread finished; awaiting finish of 2 more threads
+2020-05-01 10:27:56,707: INFO: worker thread finished; awaiting finish of 1 more threads
+2020-05-01 10:27:56,715: INFO: worker thread finished; awaiting finish of 0 more threads
+2020-05-01 10:27:56,715: INFO: EPOCH - 2 : training on 679346 raw words (517112 effective words) took 1.1s, 483618 effective words/s
+2020-05-01 10:27:57,719: INFO: EPOCH 3 - PROGRESS: at 84.64% examples, 432452 words/s, in_qsize 5, out_qsize 1
+2020-05-01 10:27:57,790: INFO: worker thread finished; awaiting finish of 3 more threads
+2020-05-01 10:27:57,892: INFO: worker thread finished; awaiting finish of 2 more threads
+2020-05-01 10:27:57,892: INFO: worker thread finished; awaiting finish of 1 more threads
+2020-05-01 10:27:57,892: INFO: worker thread finished; awaiting finish of 0 more threads
+2020-05-01 10:27:57,892: INFO: EPOCH - 3 : training on 679346 raw words (516797 effective words) took 1.2s, 439588 effective words/s
+2020-05-01 10:27:58,918: INFO: EPOCH 4 - PROGRESS: at 68.08% examples, 344828 words/s, in_qsize 7, out_qsize 0
+2020-05-01 10:27:59,135: INFO: worker thread finished; awaiting finish of 3 more threads
+2020-05-01 10:27:59,141: INFO: worker thread finished; awaiting finish of 2 more threads
+2020-05-01 10:27:59,146: INFO: worker thread finished; awaiting finish of 1 more threads
+2020-05-01 10:27:59,151: INFO: worker thread finished; awaiting finish of 0 more threads
+2020-05-01 10:27:59,151: INFO: EPOCH - 4 : training on 679346 raw words (517130 effective words) took 1.3s, 412024 effective words/s
+2020-05-01 10:28:00,156: INFO: EPOCH 5 - PROGRESS: at 81.60% examples, 417719 words/s, in_qsize 5, out_qsize 2
+2020-05-01 10:28:00,234: INFO: worker thread finished; awaiting finish of 3 more threads
+2020-05-01 10:28:00,238: INFO: worker thread finished; awaiting finish of 2 more threads
+2020-05-01 10:28:00,245: INFO: worker thread finished; awaiting finish of 1 more threads
+2020-05-01 10:28:00,252: INFO: worker thread finished; awaiting finish of 0 more threads
+2020-05-01 10:28:00,252: INFO: EPOCH - 5 : training on 679346 raw words (517224 effective words) took 1.1s, 471579 effective words/s
+2020-05-01 10:28:00,253: INFO: training on a 3396730 raw words (2585325 effective words) took 5.9s, 440468 effective words/s
+2020-05-01 10:28:00,253: INFO: storing 12258x300 projection weights into ./output/vec/total.vec
+2020-05-01 10:30:05,645: INFO: running word2vec.py 
+2020-05-01 10:30:05,646: INFO: collecting all words and their counts
+2020-05-01 10:30:05,646: INFO: PROGRESS: at sentence #0, processed 0 words, keeping 0 word types
+2020-05-01 10:30:05,701: INFO: PROGRESS: at sentence #10000, processed 48089 words, keeping 5643 word types
+2020-05-01 10:30:05,764: INFO: PROGRESS: at sentence #20000, processed 91601 words, keeping 7503 word types
+2020-05-01 10:30:05,827: INFO: PROGRESS: at sentence #30000, processed 139758 words, keeping 15208 word types
+2020-05-01 10:30:05,876: INFO: PROGRESS: at sentence #40000, processed 189109 words, keeping 21428 word types
+2020-05-01 10:30:05,925: INFO: PROGRESS: at sentence #50000, processed 241696 words, keeping 27176 word types
+2020-05-01 10:30:05,971: INFO: PROGRESS: at sentence #60000, processed 292136 words, keeping 31886 word types
+2020-05-01 10:30:06,032: INFO: PROGRESS: at sentence #70000, processed 342363 words, keeping 36261 word types
+2020-05-01 10:30:06,110: INFO: PROGRESS: at sentence #80000, processed 395017 words, keeping 40243 word types
+2020-05-01 10:30:06,177: INFO: PROGRESS: at sentence #90000, processed 447457 words, keeping 43761 word types
+2020-05-01 10:30:06,234: INFO: PROGRESS: at sentence #100000, processed 496860 words, keeping 47306 word types
+2020-05-01 10:30:06,285: INFO: PROGRESS: at sentence #110000, processed 546167 words, keeping 50718 word types
+2020-05-01 10:30:06,328: INFO: PROGRESS: at sentence #120000, processed 593803 words, keeping 53915 word types
+2020-05-01 10:30:06,381: INFO: PROGRESS: at sentence #130000, processed 645989 words, keeping 55328 word types
+2020-05-01 10:30:06,429: INFO: collected 56583 word types from a corpus of 679346 raw words and 135892 sentences
+2020-05-01 10:30:06,429: INFO: Loading a fresh vocabulary
+2020-05-01 10:30:06,551: INFO: effective_min_count=5 retains 12258 unique words (21% of original 56583, drops 44325)
+2020-05-01 10:30:06,552: INFO: effective_min_count=5 leaves 609983 word corpus (89% of original 679346, drops 69363)
+2020-05-01 10:30:06,596: INFO: deleting the raw counts dictionary of 56583 items
+2020-05-01 10:30:06,600: INFO: sample=0.001 downsamples 37 most-common words
+2020-05-01 10:30:06,600: INFO: downsampling leaves estimated 517045 word corpus (84.8% of prior 609983)
+2020-05-01 10:30:06,657: INFO: estimated required memory for 12258 words and 300 dimensions: 35548200 bytes
+2020-05-01 10:30:06,657: INFO: resetting layer weights
+2020-05-01 10:30:06,940: INFO: training model with 4 workers on 12258 vocabulary and 300 features, using sg=0 hs=0 sample=0.001 negative=5 window=4
+2020-05-01 10:30:07,949: INFO: EPOCH 1 - PROGRESS: at 69.53% examples, 358379 words/s, in_qsize 1, out_qsize 0
+2020-05-01 10:30:08,265: INFO: worker thread finished; awaiting finish of 3 more threads
+2020-05-01 10:30:08,269: INFO: worker thread finished; awaiting finish of 2 more threads
+2020-05-01 10:30:08,275: INFO: worker thread finished; awaiting finish of 1 more threads
+2020-05-01 10:30:08,277: INFO: worker thread finished; awaiting finish of 0 more threads
+2020-05-01 10:30:08,277: INFO: EPOCH - 1 : training on 679346 raw words (517050 effective words) took 1.3s, 387748 effective words/s
+2020-05-01 10:30:09,293: INFO: EPOCH 2 - PROGRESS: at 66.57% examples, 340383 words/s, in_qsize 0, out_qsize 0
+2020-05-01 10:30:09,838: INFO: worker thread finished; awaiting finish of 3 more threads
+2020-05-01 10:30:09,840: INFO: worker thread finished; awaiting finish of 2 more threads
+2020-05-01 10:30:09,851: INFO: worker thread finished; awaiting finish of 1 more threads
+2020-05-01 10:30:09,863: INFO: worker thread finished; awaiting finish of 0 more threads
+2020-05-01 10:30:09,868: INFO: EPOCH - 2 : training on 679346 raw words (516757 effective words) took 1.6s, 325887 effective words/s
+2020-05-01 10:30:10,889: INFO: EPOCH 3 - PROGRESS: at 62.39% examples, 316024 words/s, in_qsize 0, out_qsize 0
+2020-05-01 10:30:11,310: INFO: worker thread finished; awaiting finish of 3 more threads
+2020-05-01 10:30:11,325: INFO: worker thread finished; awaiting finish of 2 more threads
+2020-05-01 10:30:11,347: INFO: worker thread finished; awaiting finish of 1 more threads
+2020-05-01 10:30:11,359: INFO: worker thread finished; awaiting finish of 0 more threads
+2020-05-01 10:30:11,359: INFO: EPOCH - 3 : training on 679346 raw words (516803 effective words) took 1.5s, 347354 effective words/s
+2020-05-01 10:30:12,372: INFO: EPOCH 4 - PROGRESS: at 58.17% examples, 296826 words/s, in_qsize 1, out_qsize 0
+2020-05-01 10:30:12,821: INFO: worker thread finished; awaiting finish of 3 more threads
+2020-05-01 10:30:12,821: INFO: worker thread finished; awaiting finish of 2 more threads
+2020-05-01 10:30:12,828: INFO: worker thread finished; awaiting finish of 1 more threads
+2020-05-01 10:30:12,841: INFO: worker thread finished; awaiting finish of 0 more threads
+2020-05-01 10:30:12,841: INFO: EPOCH - 4 : training on 679346 raw words (516935 effective words) took 1.5s, 349640 effective words/s
+2020-05-01 10:30:13,857: INFO: EPOCH 5 - PROGRESS: at 71.12% examples, 361451 words/s, in_qsize 1, out_qsize 2
+2020-05-01 10:30:14,296: INFO: worker thread finished; awaiting finish of 3 more threads
+2020-05-01 10:30:14,297: INFO: worker thread finished; awaiting finish of 2 more threads
+2020-05-01 10:30:14,310: INFO: worker thread finished; awaiting finish of 1 more threads
+2020-05-01 10:30:14,327: INFO: worker thread finished; awaiting finish of 0 more threads
+2020-05-01 10:30:14,328: INFO: EPOCH - 5 : training on 679346 raw words (516772 effective words) took 1.5s, 348290 effective words/s
+2020-05-01 10:30:14,328: INFO: training on a 3396730 raw words (2584317 effective words) took 7.4s, 349954 effective words/s
+2020-05-01 10:30:14,328: INFO: storing 12258x300 projection weights into ./output/vec/total.vec

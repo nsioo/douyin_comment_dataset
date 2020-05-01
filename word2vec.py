@@ -49,18 +49,20 @@ def stop_word(sw_path):
             swl.append(i.strip('\n'))
         return swl
 
-def data_process_xlsx(data):
+def data_process_excel(data, sw):
     jieba.load_userdict('./output/emoji.txt')
-    df = pd.read_excel(data+'_update.xlsx', sheet_name='Sheet1', encoding = 'utf-8')
+    df = pd.read_excel('./radom_vedio/'+data+'_update.xlsx', sheet_name=0, encoding = 'utf-8')
     df = df['comment'].map(lambda x : ''.join(re.findall('[\u4e00-\u9fff]', str(x))))
 
     sl = []
     for c in df:
         s = jieba.lcut(c, cut_all=False, HMM=True)
-        s = ' '.join(s)
+        # print('打印 s:', s)
+        s = [i for i in s if not i in sw]
+        # s = ' '.join(s)
         sl.append(s)
     print('good'+data)
-    return sl
+    return sl, data
 
 
 def data_process_txt(data, sw):    
@@ -77,11 +79,11 @@ def data_process_txt(data, sw):
         return (s1, data)
 
 
-def add_sentence_corpus(sl, data, save_path='./output/'):
+def add_sentence_corpus(sl, data='total', save_path='./output/', clean=False):
 
-    if os.path.exists(save_path+data+'_s.txt'):
-        os.remove(save_path+data+'_s.txt')
-        open(save_path+data+'_s.txt', 'w', encoding='utf_8_sig')
+    if clean:
+        os.remove(save_path+data+'.txt')
+        open(save_path+data+'.txt', 'w', encoding='utf_8_sig')
 
     for line in sl:
         # 空行和单个字行去除
@@ -89,7 +91,7 @@ def add_sentence_corpus(sl, data, save_path='./output/'):
             continue
         elif len(line) == 1:
             continue
-        with open(save_path+data+'_s.txt', 'a', newline='\n', encoding='utf_8_sig') as f:
+        with open(save_path+data+'.txt', 'a', newline='\n', encoding='utf_8_sig') as f:
             f.write(' '.join(line)+'\r\n')    
     print('good2'+data)
 
@@ -127,7 +129,7 @@ def build_w2v(st_path, save_path):
     alpha (float, optional) – 初始学习率
     iter (int, optional) – 迭代次数，默认为5
     '''
-    model = Word2Vec(LineSentence(st_path), size=300, window=3, min_count=5, workers=cpu_count())
+    model = Word2Vec(LineSentence(st_path), size=300, window=4, min_count=5, workers=cpu_count())
     
     # model 保存
     # model.save(save_path)
@@ -151,28 +153,36 @@ if __name__ == "__main__":
     # build_emoji_corpus('雷军评论')
 
     # 制作 setence corpus
-    dsl = ['减肥健康', '情感恋爱', '抗疫', '搞笑2', '搞笑3', '明星李易峰', '罗永浩', '董明珠', '雷军评论']
+
+    dsl = ['dataset2', 'dataset3', 'dataset4', 'dataset5', 'dataset6', 'dataset7', 'dataset8', 
+    'dataset9', 'dataset10', 'dataset11', 'dataset12', 'dataset13', 'dataset14', 'dataset15',
+    'dataset16', 'dataset17','dataset18']
+    # dsl = ['减肥健康', '情感恋爱', '抗疫', '搞笑2', '搞笑3', '明星李易峰', '罗永浩', '董明珠', '雷军评论']
     # dsl = ['减肥健康']
-    p = Pool(4)
-    data_process_txt_v2 = partial(data_process_txt, sw=swl)
-    sls = p.map(data_process_txt_v2, dsl)
-    p.close()
-    p.join()
+    # p = Pool(4)
+    # data_process_excel_v2 = partial(data_process_excel, sw=swl)
+    # sls = p.map(data_process_excel_v2, dsl)
+    # p.close()
+    # p.join()
 
-    for ls, data in sls:
-        # print('data:', data, 'ls', ls)
-        print('--'*20)
-        add_sentence_corpus(ls, data)
+    # for ls, data in sls:
+    #     # print('data:', data, 'ls', ls)
+    #     print('--'*20)
+    #     add_sentence_corpus(ls)
     
-    # ================================================== #
-    for p, _, fs in [i for i in os.walk('./output')]:
-        for f in fs[2:]:
-            f_p = p+'/'+f
-            print(f_p)
-            #制作 word2vector
-            build_w2v(f_p, p+'/'+'vec/'+f[:3]+'.vec')    
+    # # ================================================== #
+    # for p, _, fs in [i for i in os.walk('./output')]:
+    #     for f in fs[2:]:
+    #         f_p = p+'/'+f
+    #         print(f_p)
+    #         #制作 word2vector
+    #         build_w2v(f_p, p+'/'+'vec/'+f[:3]+'.vec')    
 
     # ================================================== #
+
+    build_w2v('./output/total.txt', './output/vec/total.vec')
+
+
     # test word2vector
     # testwords = ['哈哈', '主播', '可爱', '厉害', '心疼']
     # evaluate(testwords)
