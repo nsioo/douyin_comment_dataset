@@ -3,8 +3,8 @@ import time
 import pandas as pd
 import json
 
-def load_url_co():
-    df = pd.read_excel('../mitmproxy/url_400.xls', encoding='utf-8-sig')
+def load_url_co(path):
+    df = pd.read_excel(path, encoding='utf-8-sig')
     for i, request in df.iterrows():
         # process cookies         
         c = json.loads(request['cookies'])

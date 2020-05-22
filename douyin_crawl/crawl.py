@@ -180,7 +180,7 @@ def strToByte(str):
     return bArr
 
 def str2hex(s):
-    odata = 0;
+    odata = 0
     su =s.upper()
     for c in su:
         tmp=ord(c)
@@ -217,14 +217,18 @@ def doPostGzip(url,headers,charset, params):
 
 if __name__=="__main__":
 
-    save_to  = './result_v3.txt'
+    # 改一下!!##############################
+    url_cookies_path = './xxxxxx.xls'
+    save_to  = './result.txt'
+    ########################################
+
     if os.path.exists(save_to):
         # os.remove('./comment.txt') # 是否清除上次的文档
         open(save_to, 'w', encoding='utf-8-sig')
     
     good = 0
     error = 0
-    generator = load_url_co()
+    generator = load_url_co(url_cookies_path)
     for url, ts, _rticket, cookies in generator:
         params = url[url.index('?')+1:]
         STUB = ""
