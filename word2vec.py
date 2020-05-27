@@ -67,7 +67,7 @@ def data_process_excel(data, sw):
 
 def data_process_txt(data, sw):    
     jieba.load_userdict('./output/emoji.txt')
-    with open('./single_vedio/'+data+'.txt', encoding = 'utf_8_sig') as f:
+    with open('./douyin_crawl/result/'+data+'.txt', encoding = 'utf_8_sig') as f:
         s1 = []
         for l in f.readlines():
             l = ''.join(re.findall('[\u4e00-\u9fff]', str(l)))
@@ -79,7 +79,7 @@ def data_process_txt(data, sw):
         return (s1, data)
 
 
-def add_sentence_corpus(sl, data='total', save_path='./output/', clean=False):
+def add_sentence_corpus(sl, data='result_v2_process', save_path='./output/'):
 
     if clean:
         os.remove(save_path+data+'.txt')
@@ -94,6 +94,30 @@ def add_sentence_corpus(sl, data='total', save_path='./output/', clean=False):
         with open(save_path+data+'.txt', 'a', newline='\n', encoding='utf_8_sig') as f:
             f.write(' '.join(line)+'\r\n')    
     print('good2'+data)
+
+
+def add_sentence_corpus_tocsv(sl, data='result_v2_process', save_path='./output/'):
+
+    df = pd.DataFrame(columns=['word'])    
+    bag = []
+    for line in sl:
+        # 空行和单个字行去除
+        if line == []:
+            continue
+        elif len(line) == 1:
+            continue
+        else:
+            for l2 in line:
+                bag.append(l2)
+
+    df['word'] = bag
+    df.to_csv(save_path+data+'.csv', index=False,  encoding='utf-8-sig')
+    print('good2'+data)
+
+
+
+
+
 
 
 
@@ -154,23 +178,24 @@ if __name__ == "__main__":
 
     # 制作 setence corpus
 
-    dsl = ['dataset2', 'dataset3', 'dataset4', 'dataset5', 'dataset6', 'dataset7', 'dataset8', 
-    'dataset9', 'dataset10', 'dataset11', 'dataset12', 'dataset13', 'dataset14', 'dataset15',
-    'dataset16', 'dataset17','dataset18']
+    # dsl = ['dataset2', 'dataset3', 'dataset4', 'dataset5', 'dataset6', 'dataset7', 'dataset8', 
+    # 'dataset9', 'dataset10', 'dataset11', 'dataset12', 'dataset13', 'dataset14', 'dataset15',
+    # 'dataset16', 'dataset17','dataset18']
     # dsl = ['减肥健康', '情感恋爱', '抗疫', '搞笑2', '搞笑3', '明星李易峰', '罗永浩', '董明珠', '雷军评论']
-    # dsl = ['减肥健康']
-    # p = Pool(4)
-    # data_process_excel_v2 = partial(data_process_excel, sw=swl)
-    # sls = p.map(data_process_excel_v2, dsl)
-    # p.close()
-    # p.join()
+    dsl = ['result_v2']
+    data = 'result_v2_process'
+    p = Pool(cpu_count())
+    data_process_txt_v2 = partial(data_process_txt, sw=swl)
+    sls = p.map(data_process_txt_v2, dsl)
+    p.close()
+    p.join()
 
-    # for ls, data in sls:
-    #     # print('data:', data, 'ls', ls)
-    #     print('--'*20)
-    #     add_sentence_corpus(ls)
+    for ls, data in sls:
+        # print('data:', data, 'ls', ls)
+        print('--'*20)
+        add_sentence_corpus_tocsv(ls, data=data)
     
-    # # ================================================== #
+    # ================================================== #
     # for p, _, fs in [i for i in os.walk('./output')]:
     #     for f in fs[2:]:
     #         f_p = p+'/'+f
@@ -180,7 +205,7 @@ if __name__ == "__main__":
 
     # ================================================== #
 
-    build_w2v('./output/total.txt', './output/vec/total.vec')
+    # build_w2v('./output/total.txt', './output/vec/total.vec')
 
 
     # test word2vector

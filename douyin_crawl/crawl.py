@@ -218,8 +218,8 @@ def doPostGzip(url,headers,charset, params):
 if __name__=="__main__":
 
     # 改一下!!##############################
-    url_cookies_path = './xxxxxx.xls'
-    save_to  = './result.txt'
+    url_cookies_path = './urlc_27_5_2020.xls'
+    save_to  = './result_v2.txt'
     ########################################
 
     if os.path.exists(save_to):
@@ -228,8 +228,11 @@ if __name__=="__main__":
     
     good = 0
     error = 0
+    count = 0
     generator = load_url_co(url_cookies_path)
     for url, ts, _rticket, cookies in generator:
+        print('count:', count)
+        count += 1
         params = url[url.index('?')+1:]
         STUB = ""
         

@@ -13,7 +13,7 @@ class Counter:
         self.requestNum = 0
         self.responseOrErrorNum = 0
         self.aa = 0
-        self.save_to = 'RESULT_400.txt'
+        self.save_to = 'urlc_27_5_2020.xls'
         # self.all_arr = [['请求路径','请求域名','请求path','cookies','请求大小(b)','响应大小','响应类型','请求响应时间差(s)','请求开始时间','请求响应结束时间']]
         self.all_arr = [['请求路径', 'cookies']]
  
@@ -36,8 +36,8 @@ class Counter:
         self.responseOrErrorNum = self.responseOrErrorNum+1
         flow.end_time = time.time()
         
-        if self.num % 400 == 0:
-            self.save_to = 'url_'+str(self.num)+'.xls'
+        # if self.num % 400 == 0:
+        #     self.save_to = 'url_'+str(self.num)+'.xls'
                 
         self.save_excel(self.all_arr,self.save_to)
  
